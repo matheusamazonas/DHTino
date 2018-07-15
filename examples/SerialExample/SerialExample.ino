@@ -19,5 +19,4 @@ void loop()
   Serial.println(info.humid);
   Serial.print("Temperature: ");
   Serial.println(info.temp);
-  
 }

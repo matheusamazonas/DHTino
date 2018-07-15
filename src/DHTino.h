@@ -10,6 +10,7 @@
 
 struct DHTinfo
 {
+	bool valid = false;
 	float temp;
 	float humid;
 };

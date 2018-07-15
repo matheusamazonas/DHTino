@@ -7,12 +7,6 @@
 #include <stdint.h>
 #include "DHTino.h"
 
-union floatData
-{
-	float f;
-	int data[2];
-};
-
 void DHTino::init()
 {
 	pinMode(_pin, OUTPUT);
@@ -43,9 +37,9 @@ byte* DHTino::readData()
 	unsigned long delay;
 	byte value = 0;
 	byte b;
-	byte *data = (byte*) malloc(4 * sizeof(byte));
+	byte *data = (byte*) malloc(5 * sizeof(byte));
 
-	for (int i=0; i < 4; i++)
+	for (int i=0; i < 5; i++)
 	{
 		b = 0;
 		for(int j=0; j < 8; j++)
@@ -66,8 +60,12 @@ struct DHTinfo DHTino::getInfo()
 	struct DHTinfo info;
 	byte* data = readData();
 
-	info.humid = (data[0] * 265 + data[1]) / 10.0;
-	info.temp = (data[2] * 256 + data[3]) / 10.0;
+	if (data[4] == data[0] + data[1] + data[2] + data[3])
+	{
+		info.valid = true;
+		info.humid = (data[0] * 265 + data[1]) / 10.0;
+		info.temp = (data[2] * 256 + data[3]) / 10.0;
+	}
 
 	return info;
 }
