@@ -1,0 +1,4 @@
+DHTino KEYWORD1
+getInfo KEYWORD2
+getTemp KEYWORD2
+getHumid KEYWORD2
