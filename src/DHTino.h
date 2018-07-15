@@ -24,7 +24,7 @@ public:
 private:
 	uint8_t _pin;
 	void init();
-	int readInt();
+	byte* readData();
 };
 
 #endif
