@@ -23,6 +23,10 @@ public:
 	double getHumid();
 private:
 	uint8_t _pin;
+	void init();
+	double readTemp();
+	double readHumid();
+	double readCheck();
 };
 
 #endif
