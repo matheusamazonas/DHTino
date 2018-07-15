@@ -24,7 +24,7 @@ public:
 	float getHumid();
 private:
 	uint8_t _pin;
-	void init();
+	void initTransmission();
 	byte* readData();
 };
 
