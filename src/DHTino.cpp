@@ -1,5 +1,5 @@
 /*
-	DHTino.cpp - Arduino library for the HC-SR04 ultrasonic sensor
+	DHTino.cpp - Arduino library for the DHT22 temperature and humidity sensor
 	Created by Matheus Amazonas Cabral de Andrade on July 15th, 2018
 */
 
