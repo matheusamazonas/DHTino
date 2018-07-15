@@ -10,8 +10,8 @@
 
 struct DHTinfo
 {
-	double temp;
-	double humid;
+	float temp;
+	float humid;
 };
 
 class DHTino
@@ -19,14 +19,12 @@ class DHTino
 public:
 	DHTino(uint8_t pin);
 	struct DHTinfo getInfo();
-	double getTemp();
-	double getHumid();
+	float getTemp();
+	float getHumid();
 private:
 	uint8_t _pin;
 	void init();
-	double readTemp();
-	double readHumid();
-	double readCheck();
+	int readInt();
 };
 
 #endif
