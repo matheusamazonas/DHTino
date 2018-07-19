@@ -31,13 +31,12 @@ void DHTino::initTransmission()
 
 byte* DHTino::readData()
 {
-	initTransmission();
-
 	unsigned long delay;
-	byte value = 0;
-	byte b;
+	byte value, b = 0;
 	// The sensor sends 40 bits of data, 5 bytes
 	byte *data = (byte*) malloc(5 * sizeof(byte));
+
+	initTransmission();
 
 	for (int i=0; i < 5; i++)
 	{
@@ -74,7 +73,7 @@ struct DHTinfo DHTino::getInfo()
 			info.temp = - info.temp;
 		}
 	}
-
+	free(data);
 	return info;
 }
 
