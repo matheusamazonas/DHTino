@@ -11,6 +11,10 @@
 DHTino::DHTino (uint8_t pin)
 {
 	_pin = pin;
+}
+
+void DHTino::begin()
+{
 	pinMode(_pin, OUTPUT);
 	digitalWrite(_pin, HIGH);
 }

@@ -8,6 +8,7 @@ void setup()
   while (!Serial) 
   {
   }
+  dht.begin();
   Serial.println("Setup is done");
 }
 

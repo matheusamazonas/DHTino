@@ -19,6 +19,7 @@ class DHTino
 {
 public:
 	DHTino(uint8_t pin);
+	void begin();
 	struct DHTinfo getInfo();
 	float getTemp();
 	float getHumid();
