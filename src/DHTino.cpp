@@ -39,24 +39,29 @@ byte* DHTino::readData()
 	byte value, b = 0;
 	// The sensor sends 40 bits of data, 5 bytes
 	byte *data = (byte*) malloc(5 * sizeof(byte));
-
-	initTransmission();
-
-	for (int i=0; i < 5; i++)
+	if (data == NULL)
 	{
-		b = 0;
-		for(int j=0; j < 8; j++)
-		{
-			b = b << 1;
-			delay = pulseIn(_pin, HIGH);
-			// 26~28ms is a 0, 70ms is a 1
-			delay > 28 ? value = 1 : value = 0;
-			b = b | value;
-			
-		}
-		data[i] = b;
+		return NULL;
 	}
-	return data;
+	else
+	{
+		initTransmission();
+		for (int i=0; i < 5; i++)
+		{
+			b = 0;
+			for(int j=0; j < 8; j++)
+			{
+				b = b << 1;
+				delay = pulseIn(_pin, HIGH);
+				// 26~28ms is a 0, 70ms is a 1
+				delay > 28 ? value = 1 : value = 0;
+				b = b | value;
+				
+			}
+			data[i] = b;
+		}
+		return data;
+	}
 }
 
 struct DHTinfo DHTino::getInfo()
@@ -65,19 +70,26 @@ struct DHTinfo DHTino::getInfo()
 	// Read all the data at once
 	byte* data = readData();
 
-	// The last byte is the checksum
-	if (data[4] == data[0] + data[1] + data[2] + data[3])
+	if (data == NULL)
 	{
-		info.valid = true;
-		info.humid = (data[0] * 265 + data[1]) / 10.0;
-		info.temp = (data[2] * 256 + data[3]) / 10.0;
-		// The first bit represents it signal
-		if (data[2] & 128)
-		{
-			info.temp = - info.temp;
-		}
+		info.valid = false;
 	}
-	free(data);
+	else
+	{
+		// The last byte is the checksum
+		if (data[4] == data[0] + data[1] + data[2] + data[3])
+		{
+			info.valid = true;
+			info.humid = (data[0] * 265 + data[1]) / 10.0;
+			info.temp = (data[2] * 256 + data[3]) / 10.0;
+			// The first bit represents it signal
+			if (data[2] & 128)
+			{
+				info.temp = - info.temp;
+			}
+		}
+		free(data);
+	}
 	return info;
 }
 
