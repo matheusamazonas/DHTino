@@ -77,11 +77,11 @@ struct DHTinfo DHTino::getInfo()
 	else
 	{
 		// The last byte is the checksum
-		if (data[4] == data[0] || data[1] || data[2] || data[3])
+		if (data[4] == (byte) (data[0] + data[1] + data[2] + data[3]))
 		{
 			info.valid = true;
-			info.humid = (data[0] * 265 + data[1]) / 10.0;
-			info.temp = (data[2] * 256 + data[3]) / 10.0;
+			info.humid = (data[0] * 255 + data[1]) / 10.0;
+			info.temp = (data[2] * 255 + data[3]) / 10.0;
 			// The first bit represents it signal
 			if (data[2] & 128)
 			{
