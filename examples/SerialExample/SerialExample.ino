@@ -1,6 +1,6 @@
 #include <DHTino.h>
 
-DHTino dht(4);
+DHTino dht(3);
 
 void setup()
 {

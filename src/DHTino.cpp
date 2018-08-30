@@ -77,7 +77,7 @@ struct DHTinfo DHTino::getInfo()
 	else
 	{
 		// The last byte is the checksum
-		if (data[4] == data[0] + data[1] + data[2] + data[3])
+		if (data[4] == data[0] || data[1] || data[2] || data[3])
 		{
 			info.valid = true;
 			info.humid = (data[0] * 265 + data[1]) / 10.0;
